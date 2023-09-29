@@ -59,21 +59,25 @@ body{
     margin: 20px 20px 0px 20px;
     height: 45px;
     border: .5px solid rgb(231, 227, 227);
-    border-radius: 5px
+    border-radius: 5px;
+    padding-left: 20px;
+    outline: none;
+    caret-color: #1877f2;
 }
- 
+input:focus {
+    border: 1px solid rgb(56, 128, 223);
+  }
+
 .input-filed input::placeholder{
     color: rgb(179, 176, 176);
     margin-left: 10px;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     font-size: 16px;
     letter-spacing: 0.5px;
     /* border: none; */
 }
 
-.input-filed input:focus{
-    border-color: aqua;
-}
+
 
 .button-field{
     width: 100%;
@@ -144,7 +148,7 @@ body{
     justify-content: center;
     position: relative;
     top: 69px;
-    left: 18px;
+    left: 3px;
 }
 .C-A-Button{
     cursor: pointer;
