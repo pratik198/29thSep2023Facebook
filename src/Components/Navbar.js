@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../Styles/Navbar.css";
-
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import FlagIcon from '@mui/icons-material/Flag';
