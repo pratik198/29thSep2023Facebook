@@ -222,7 +222,8 @@ function Navbar() {
                 </IconButton>
                 
             </div>
-            apiSearchData && <SearchComponent apiSearchData={apiSearchData} />
+            {/* apiSearchData &&  */}
+            <SearchComponent apiSearchData={apiSearchData} />
         </div>
     );
 }
