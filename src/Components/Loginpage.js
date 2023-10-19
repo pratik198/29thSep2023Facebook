@@ -2,10 +2,13 @@
 import React, { useState } from "react";
 import "../Styles/Loginpage.css";
 import Button from "@mui/material/Button";
-import HomePage from './Homepage';
-// import Updatepassword from "./Updatepassword";
-// import { useNavigate } from "react-router-dom";
-import { getBearerToken, setBearerToken } from "./Datastore";
+import { useNavigate} from "react-router";
+import { Link } from "react-router-dom";
+
+
+
+// import { getBearerToken,setBearerToken } from "./Datastore";
+
 
 function Loginpage() {
   const projectID = "f104bi07c490";
@@ -13,8 +16,8 @@ function Loginpage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const navigate = useNavigate();
-
+  const navigate = useNavigate();
+  
   function mailInput(e) {
     const mailSet = e.target.value;
     setEmail(mailSet);
@@ -47,8 +50,9 @@ function Loginpage() {
         console.log("Successfully logged in");
         setIsLoggedIn(true);
         let json = await response.json();
-        setBearerToken(json["token"]);
-        // navigate("/HomePage");
+        // setBearerToken(json["token"]);
+        localStorage.setItem('token',json.token);
+        navigate("/main");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);
@@ -59,9 +63,9 @@ function Loginpage() {
     }
   }
 
-  if (isLoggedIn) {
-    return <HomePage />;
-  }
+  // if (isLoggedIn) {
+  //   return <HomePage />;
+  // }
 
   return (
     <div className="container">
@@ -104,6 +108,7 @@ function Loginpage() {
               ></input>
             </div>
             <div className="login-button">
+            
               <Button
                 variant="contained"
                 className="Button"
@@ -113,7 +118,9 @@ function Loginpage() {
               </Button>
             </div>
             <div className="Forgot-text">
-              <a href="#">Forgotten password?</a>
+              <Link to={"/update"}>
+              <p>Forgotten password?</p>
+              </Link>
             </div>
             <div className="line"></div>
 

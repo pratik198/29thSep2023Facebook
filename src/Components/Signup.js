@@ -5,38 +5,25 @@ function Signup() {
   const projectID = "f104bi07c490";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name,setName] = useState("");
-  const [date,setDate] = useState("");
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const navigate = useNavigate();
-  
- 
-
-
-  // function handelDateChange(e) => {
-  //   setName(e.target.value);
-  // };
 
   const handleEmailChange = (e) => {
-    console.log("cyz")
+    console.log("cyz");
     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    console.log("arun")
+    console.log("arun");
     setPassword(e.target.value);
   };
 
   const handleNameChange = (e) => {
-    // setSearchQuery(e.target.value);
-    console.log("pratik")
+    console.log("pratik");
     setName(e.target.value);
   };
 
-  // useEffect(() => {
-  //   handlesignup();
-  // }, []);
   async function handlesignup(e) {
     console.log("handelsignup");
     console.log(name);
@@ -44,17 +31,16 @@ function Signup() {
     console.log(password);
     e.preventDefault();
     try {
-      
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/user/signup",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            projectID:  "f104bi07c490",
+            projectID: "f104bi07c490",
           },
           body: JSON.stringify({
-            name:name,
+            name: name,
             email: email,
             password: password,
             appType: "facebook",
@@ -64,8 +50,6 @@ function Signup() {
       console.log("handelsignup");
       if (response.ok) {
         console.log("Successfully singed up in");
-        // setIsLoggedIn(true);
-        // navigate("/HomePage");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.message);
@@ -104,16 +88,19 @@ function Signup() {
             />
           </div>
           <div className="center-input">
-            <input type="email" placeholder="Email"
-            value = {email}
-            onChange={handleEmailChange}
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={handleEmailChange}
             />
-            
           </div>
           <div className="center-input">
-            <input type="password" placeholder="New Password" 
-            value={password}
-            onChange={handlePasswordChange}
+            <input
+              type="password"
+              placeholder="New Password"
+              value={password}
+              onChange={handlePasswordChange}
             />
           </div>
           <div className="dob">
@@ -121,9 +108,8 @@ function Signup() {
           </div>
           <div className="row">
             <select className="register__date2">
-        
               <option value="Day">Day</option>
-             
+
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -158,7 +144,7 @@ function Signup() {
             </select>
             <select className="register__date3">
               <option value="Month">Month</option>
-              
+
               <option value="1">Jan</option>
               <option value="2">Feb</option>
               <option value="3">Mar</option>
@@ -174,7 +160,7 @@ function Signup() {
             </select>
             <select className="register__date3">
               <option value="Year">Year</option>
-              
+
               <option value="2018">2020</option>
               <option value="2018">2019</option>
               <option value="2018">2018</option>
@@ -322,10 +308,7 @@ function Signup() {
               Sign Up?
             </button>
           </div>
-          {/* <a href=""> */}
-            <p className="register__login">Already have an account?</p>
-          {/* </a> */}
-          {/* <p className="register__login">Already have an account?</p> */}
+          <p className="register__login">Already have an account?</p>
         </form>
       </div>
     </div>

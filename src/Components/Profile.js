@@ -1,15 +1,3 @@
-// import React from 'react'
-// import '../Styles/Profile.css'
-// function Profile() {
-//   return (
-//     <div className='search-profile'>
-        
-//     </div>
-//   )
-// }
-
-// export default Profile
-
 import React, { useState, useEffect } from "react";
 import '../Styles/Profile.css'
 import Card from '@mui/material/Card';
