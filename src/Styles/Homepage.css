@@ -4,11 +4,15 @@
     flex-direction: column;
     /* background-color: red; */
     row-gap: 17px;
-    padding-top: 18px;
+    padding-top: 5em;
     /* margin-top: 6px; */
 }
 
 .footer{
     display: flex;
     justify-content: space-around;
+}
+
+body {
+    background-color: #E9EBEE;
 }

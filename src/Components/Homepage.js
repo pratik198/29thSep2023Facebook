@@ -33,7 +33,7 @@ function Homepage() {
   };
   console.log(Data);
   return (
-    <div style={{ display: "flex", alignItems: "center", flexDirection: "column", rowGap: "17px", paddingTop: "18px" }} className="post-box"> 
+    <div className="post-box"> 
       {Data &&
         Data.map((post) => (
           <Card sx={{ maxWidth: 345 }}>

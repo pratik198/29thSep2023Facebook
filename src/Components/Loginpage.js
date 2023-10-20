@@ -51,6 +51,7 @@ function Loginpage() {
         setIsLoggedIn(true);
         let json = await response.json();
         // setBearerToken(json["token"]);
+        console.log(json);
         localStorage.setItem('token',json.token);
         navigate("/main");
       } else {

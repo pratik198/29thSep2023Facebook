@@ -1,0 +1,27 @@
+.wht-is-on-your-mind {
+  height: 21em;
+  width: 31%;
+  /* background-color: #2e81f4; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.mind-box {
+  height: 99px;
+  width: 343px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin-top: 24em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.parent-avtar {
+    /* margin-left: 10px; */
+    position: relative;
+    right: 139px;
+    bottom: 17px;
+}
