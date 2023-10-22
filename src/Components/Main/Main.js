@@ -3,12 +3,14 @@ import Navbar from "../Navbar";
 import Homepage from "../Homepage";
 import '../Main/Main.css'
 import WhatIsOnUrMind from "../WhatIsOnUrMind";
+import SidebarLeft from "../SidebarLeft";
 function Main() {
   return (
     <div>
-      <WhatIsOnUrMind/>
       <Navbar />
+      <WhatIsOnUrMind/>
       <Homepage />
+      <SidebarLeft/>
     </div>
   );
 }

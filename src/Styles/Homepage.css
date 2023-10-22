@@ -4,7 +4,8 @@
     flex-direction: column;
     /* background-color: red; */
     row-gap: 17px;
-    padding-top: 5em;
+    margin-top: -25px;
+    /* padding-top: 5em; */
     /* margin-top: 6px; */
 }
 
@@ -16,3 +17,4 @@
 body {
     background-color: #E9EBEE;
 }
+

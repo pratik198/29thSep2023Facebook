@@ -36,7 +36,7 @@ function Homepage() {
     <div className="post-box"> 
       {Data &&
         Data.map((post) => (
-          <Card sx={{ maxWidth: 345 }}>
+          <Card sx={{ maxWidth: 450, maxHeight: 700}}>
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

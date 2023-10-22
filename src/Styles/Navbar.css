@@ -94,19 +94,27 @@
     width: 15%;
     background-color: #eff2f5;
     color: black;
-   
+    
     width: 15%;
+}
+
+.miu-search-bar input {
+    border: 1px solid #cfc2c2;
+    border-radius: 43px;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .header_center {
     display: flex;
-    flex: 1;
+    flex: 1 1;
     justify-content: center;
     width: 100px;
-    margin-left:227px;
+    margin-left: 227px;
     padding: 0px;
     justify-content: space-evenly;
-    gap:55px;
+    gap: 47px;
+    cursor: pointer;
 }
 
 .header_option >.MuiSvgIcon-root{
@@ -126,5 +134,5 @@
   }
 
   .image-nav{
-    height: 3em;;
+    height: 37px;
   }

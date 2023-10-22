@@ -176,6 +176,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
 import { useAuth } from './Context';
+// import SearchIcon from '@mui/icons-material/Search';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -321,7 +322,7 @@ export default function PrimarySearchAppBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search facebook"
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
