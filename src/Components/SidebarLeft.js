@@ -8,6 +8,8 @@ import ChatIcon from "@mui/icons-material/Chat";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { Avatar } from "@mui/material";
+import { Link } from "react-router-dom";
+// import Button from "@mui/icons-material"
 
 const user = {
   photoURL:
@@ -23,6 +25,10 @@ function SidebarLeft() {
           <Avatar src={user.photoURL} className="a" />
         </div>
         <h4>Arun Pratik Rout</h4>
+        {/* <div className="create-a-page">
+          <Link to="/createpage">
+           <button> create page</button></Link>
+        </div> */}
       </div>
       <div className="sidebarRow">
         <LocalHospitalIcon />

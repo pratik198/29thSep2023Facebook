@@ -4,10 +4,7 @@ import "../Styles/Loginpage.css";
 import Button from "@mui/material/Button";
 import { useNavigate} from "react-router";
 import { Link } from "react-router-dom";
-
-
-
-// import { getBearerToken,setBearerToken } from "./Datastore";
+import { setBearerToken } from "./Datastore";
 
 
 function Loginpage() {
@@ -50,7 +47,7 @@ function Loginpage() {
         console.log("Successfully logged in");
         setIsLoggedIn(true);
         let json = await response.json();
-        // setBearerToken(json["token"]);
+        setBearerToken(json["token"]);
         console.log(json);
         localStorage.setItem('token',json.token);
         navigate("/main");

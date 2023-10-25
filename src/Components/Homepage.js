@@ -12,14 +12,17 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import { getBearerToken } from "./Datastore";
 function Homepage() {
   const [Data, setData] = useState([]);
+  const [isPostLiked, setPostLiked] = useState(false);
   let api1 =
     'https://academics.newtonschool.co/api/v1/facebook/post?search={"author.name":"Carmen Shanahan"}';
   let api = "https://academics.newtonschool.co/api/v1/facebook/post";
   useEffect(() => {
-    GetData();
-  }, []);
+    GetData(); 
+    setPostLiked(false);
+  }, [isPostLiked]);
 
   const GetData = async () => {
     const response = await fetch(api, {
@@ -30,8 +33,40 @@ function Homepage() {
     const r = await response.json();
     // console.log(r)
     setData(r["data"]);
+    console.log(Data);
   };
+
+  ////like count//
+  
   console.log(Data);
+
+  const likePost = async (postId) => {
+
+    // const token = getBearerToken();
+    const token = localStorage.getItem('token');
+    const token_ = "Bearer " + token;
+    console.log(token_);
+
+    console.log(postId);
+      const response = await fetch(`https://academics.newtonschool.co/api/v1/facebook/like/${postId}`, {
+        method: "POST",
+        headers: {
+          Authorization: token_,
+          projectID: "f104bi07c490",
+        },
+      });
+    console.log(response);
+    const d= await response.json();
+    console.log(d);
+    if(response.ok){
+      setPostLiked(true);
+    }
+
+    };
+    
+
+  /////
+
   return (
     <div className="post-box"> 
       {Data &&
@@ -66,7 +101,10 @@ function Homepage() {
             <p>{post.likeCount}</p>
           </div>
           <div className="footer">
-            <span><ThumbUpOffAltOutlinedIcon/><span>Like</span></span>
+            <button onClick={()=>likePost(post._id)}> like
+            {/* <span><ThumbUpOffAltOutlinedIcon onClick={()=>likePost(post.id)}/>
+            <span>Like</span></span> */}
+            </button>
             <ChatBubbleOutlineOutlinedIcon/>
             <ShareOutlinedIcon/>
           </div>

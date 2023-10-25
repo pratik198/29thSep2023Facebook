@@ -30,13 +30,15 @@ h4 {
 }
 
 .right-sec {
-     /* position: relative; */
-     left: 11px;
-     font-weight: 600;
-     text-align: center;
-     bottom: 11px;
-     /* margin-top: 13px; */
-     margin-left: 12px;
+       /* position: relative; */
+       left: 11px;
+       /* font-weight: 600; */
+       text-align: center;
+       bottom: 11px;
+       /* margin-top: 13px; */
+       font-size: 15px;
+       margin-left: 12px;
+       font-family: Helvetica,Arial,sans-serif;
 }
 
 .sidebarRow > .MuiSvgIcon-root {

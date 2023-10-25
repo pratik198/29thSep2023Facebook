@@ -12,9 +12,12 @@
 .footer{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 11px;
 }
 
 body {
     background-color: #E9EBEE;
 }
+
+
 

@@ -14,6 +14,7 @@ function Main() {
       <WhatIsOnUrMind/>
       <Homepage />
       <SidebarLeft/>
+        
     </div>
   );
 }
