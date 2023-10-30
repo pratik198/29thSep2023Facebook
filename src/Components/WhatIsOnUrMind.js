@@ -45,6 +45,7 @@ function WhatIsOnUrMind() {
               className="box__name"
               type="text"
               placeholder="What's on your mind..?"
+              style={{border:"none", paddingLeft:"15px"}}
             />
           </div>
           <div className="bar"></div>
@@ -57,21 +58,21 @@ function WhatIsOnUrMind() {
               style={{ display: "flex", alignItems: "center" }}
             >
               <VideocamIcon style={{ color: "red" }} />
-              <Typography variant="button">Live</Typography>
+              <Typography variant="button" style={{textTransform:"none",marginLeft:"2px"}}>Live</Typography>
             </div>
             <div
               className="cam2"
               style={{ display: "flex", alignItems: "center" }}
             >
               <CollectionsIcon style={{ color: "green" }} />
-              <Typography variant="button">Photos</Typography>
+              <Typography variant="button" style={{textTransform:"none",marginLeft:"2px"}}>Photos</Typography>
             </div>
             <div
               className="cam3"
               style={{ display: "flex", alignItems: "center" }}
             >
               <MoodIcon style={{ color: " rgb(255 180 0)" }} />
-              <Typography variant="button">Feelings</Typography>
+              <Typography variant="button" style={{textTransform:"none",marginLeft:"2px"}}>Feelings</Typography>
             </div>
           </div>
         </div>

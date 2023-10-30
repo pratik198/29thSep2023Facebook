@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/Updatepassword.css";
 import { getBearerToken, setBearerToken } from "./Datastore";
+import { Link } from "react-router-dom";
 
 function Updatepassword() {
   const [name, setName] = useState("");
@@ -174,11 +175,12 @@ function Updatepassword() {
   return (
  
     <div className="new-container">
+      <Link to={"/"}>
       <img
         src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"
         alt="Facebook Logo"
         className="fb__logo"
-      />
+      /></Link>
       <div className="input-section">
         <h1>Update password</h1>
         <div className="name-email-password-btn">
