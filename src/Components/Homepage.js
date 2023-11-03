@@ -27,6 +27,7 @@ function Homepage() {
   const [Click, SetClick] = useState(false);
   const bearerToken = localStorage.getItem("token");
   const [apiData, setApiData] = useState(null);
+  const [commentInput, setCommentInput] = useState("");
   useEffect(() => {
     GetData();
     setLikeCounts(false);
@@ -136,6 +137,49 @@ function Homepage() {
     }
   };
 
+
+  /*adding comments */
+
+  const createCommentForPost = async (postId) => {
+    console.log("create comment function is called ");
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content: commentInput }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Comment created successfully");
+        const data = await response.json();
+        setComments((prevComments) => ({
+          ...prevComments,
+          [postId]: [...prevComments[postId], data.data.content],
+        }));
+        setCommentInput("");
+        handleFetchComments(postId);
+      } else {
+        const errorData = await response.json();
+        console.error("Error while creating a comment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleComment = (e) => {
+    setCommentInput(e.target.value);
+  };
+
+  
+
   return (
     <div className="post-box">
       {Data &&
@@ -186,7 +230,7 @@ function Homepage() {
             <div className="footer">
 
               <div className="like-post-like-btn"  onClick={() => handleLikePost(post._id)}>
-
+             <Button style={{textTransform:"none",color:"black",width:"115px",background: "none"}} className="Like_-button">
                 <span>
                   <img
                     src={like2}
@@ -198,25 +242,19 @@ function Homepage() {
                     }}
                   />
                   <span id="S-comment">Like</span>
-                </span>
-
-                  {/* <Button   
-                  onClick={() => likePost(post._id)}
-                  startIcon={<ThumbUpAltOutlined />}
-                >
-                  Like
-                </Button> */}
+                </span></Button>
               </div>
 
               <div
                 className="like-post-like-btn"
                 style={{ marginRight: "31px", marginTop: "-3px" }}
               >
+                <Button style={{textTransform:"none",color:"black",width:"115px",background: "none"}} className="Like_-button">
                 <img
                   src={comment}
                   alt="..."
                 />
-                <span id="S-comment">Comment</span>
+                <span id="S-comment">Comment</span></Button>
               </div>
             </div>
             <div className="line2"></div>
