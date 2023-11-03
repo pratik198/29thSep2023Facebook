@@ -154,6 +154,7 @@ body {
 .scroll-container{
     overflow-y: scroll;
     height: 222px;
+    margin-top: 50px;
 }
 .l-r-s{
     font-family: system-ui;
