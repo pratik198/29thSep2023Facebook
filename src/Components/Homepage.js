@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { getBearerToken } from "./Datastore";
+
 import like from "../Images/like.png";
 import love from "../Images/thumbs-up (1).png";
 import chat from "../Images/chat.png";
@@ -18,6 +18,8 @@ import comment from "../Images/comment.png";
 import send from "../Images/send.png";
 import { Button } from "@mui/material";
 import { ThumbUpAltOutlined } from "@mui/icons-material";
+import { Send } from "@mui/icons-material";
+import { UserMap, getBearerToken, setBearerToken } from "./Datastore";
 
 function Homepage() {
   const [Data, setData] = useState([]);
@@ -33,17 +35,18 @@ function Homepage() {
     setLikeCounts(false);
   }, [likeCounts]);
 
-  
-/* fetching post*/
-
+  /* fetching post*/
 
   const GetData = async () => {
     try {
-      const response = await fetch("https://academics.newtonschool.co/api/v1/facebook/post", {
-        headers: {
-          projectID: "f104bi07c490",
-        },
-      });
+      const response = await fetch(
+        "https://academics.newtonschool.co/api/v1/facebook/post",
+        {
+          headers: {
+            projectID: "f104bi07c490",
+          },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         setData(data.data);
@@ -62,12 +65,10 @@ function Homepage() {
 
   /*like post*/
 
-
-
   const handleLikePost = async (postId) => {
     const isLiked = Click;
     SetClick(!isLiked);
-    
+
     const response = await fetch(
       `https://academics.newtonschool.co/api/v1/facebook/like/${postId}`,
       {
@@ -78,7 +79,7 @@ function Homepage() {
         },
       }
     );
-  
+
     if (response.ok) {
       console.log(isLiked ? "Unlike is clicked" : "Like is clicked");
       setLikeCounts((prevCounts) => ({
@@ -90,15 +91,12 @@ function Homepage() {
       console.error("Error while liking the post:", errorData);
     }
   };
-  
 
-
-
-  useEffect(() => { 
+  useEffect(() => {
     const counts = {};
     const commentsData = {};
     if (apiData) {
-     apiData.forEach((post) => {
+      apiData.forEach((post) => {
         counts[post._id] = post.likeCount;
         commentsData[post._id] = [];
         handleFetchComments(post._id);
@@ -136,7 +134,6 @@ function Homepage() {
       console.error("Error:", error);
     }
   };
-
 
   /*adding comments */
 
@@ -178,13 +175,14 @@ function Homepage() {
     setCommentInput(e.target.value);
   };
 
-  
-
   return (
     <div className="post-box">
       {Data &&
         Data.map((post) => (
-          <Card sx={{ maxWidth: 450, maxHeight: 800, height: "50em" }} key={post._id}>
+          <Card
+            sx={{ maxWidth: 450, maxHeight: 800, height: "50em" }}
+            key={post._id}
+          >
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -228,42 +226,78 @@ function Homepage() {
             <div className="line"></div>
 
             <div className="footer">
-
-              <div className="like-post-like-btn"  onClick={() => handleLikePost(post._id)}>
-             <Button style={{textTransform:"none",color:"black",width:"115px",background: "none"}} className="Like_-button">
-                <span>
-                  <img
-                    src={like2}
-                    alt="..."
-                    style={{
-                      cursor: "pointer",
-                      height: "21px",
-                      marginTop: "-4px",
-                    }}
-                  />
-                  <span id="S-comment">Like</span>
-                </span></Button>
+              <div
+                className="like-post-like-btn"
+                onClick={() => handleLikePost(post._id)}
+              >
+                <Button
+                  style={{
+                    textTransform: "none",
+                    color: "black",
+                    width: "115px",
+                    background: "none",
+                  }}
+                  className="Like_-button"
+                >
+                  <span>
+                    <img
+                      src={like2}
+                      alt="..."
+                      style={{
+                        cursor: "pointer",
+                        height: "21px",
+                        marginTop: "-4px",
+                      }}
+                    />
+                    <span id="S-comment">Like</span>
+                  </span>
+                </Button>
               </div>
 
               <div
                 className="like-post-like-btn"
                 style={{ marginRight: "31px", marginTop: "-3px" }}
               >
-                <Button style={{textTransform:"none",color:"black",width:"115px",background: "none"}} className="Like_-button">
-                <img
-                  src={comment}
-                  alt="..."
-                />
-                <span id="S-comment">Comment</span></Button>
+                <Button
+                  style={{
+                    textTransform: "none",
+                    color: "black",
+                    width: "115px",
+                    background: "none",
+                  }}
+                  className="Like_-button"
+                >
+                  <img src={comment} alt="..." />
+                  <span id="S-comment">Comment</span>
+                </Button>
               </div>
             </div>
             <div className="line2"></div>
+
+            <div className="commentInputDiv">
+              <Avatar sx={{ width: 35, height: 35 }}></Avatar>
+              
+              <input
+                type="text"
+                id="inputBoxComment"
+                placeholder="Write a comment..."
+                value={commentInput}
+                onChange={handleComment}
+              />
+              <button onClick={() => createCommentForPost(post._id)}>
+                <Send />
+              </button>
+            </div>
+
             <div className="chat-container">
               {comments[post._id] && (
                 <div className="scroll-container">
                   {comments[post._id].map((comment) => (
                     <div key={comment._id}>
-                      <div className="add-commnet-section" style={{ display: "flex" }}>
+                      <div
+                        className="add-commnet-section"
+                        style={{ display: "flex" }}
+                      >
                         <Avatar
                           style={{
                             height: "35px",
@@ -272,10 +306,15 @@ function Homepage() {
                             marginRight: "4px",
                             cursor: "pointer",
                           }}
-                        />
+                          src={UserMap.get(comment.author)?.photo}></Avatar>
+                        
                         <div className="added-comment">
                           <p>
-                            <strong style={{ fontSize: "12px" }}>{comment.author.name}</strong>
+                            {comment.author && (
+                              <strong style={{ fontSize: "12px" }}>
+                                {comment.author.name}
+                              </strong>
+                            )}
                           </p>
                           <p style={{ fontSize: "15px" }}>{comment.content}</p>
                         </div>

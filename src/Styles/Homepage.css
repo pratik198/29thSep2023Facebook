@@ -155,8 +155,8 @@ body {
 }
 .scroll-container{
     overflow-y: scroll;
-    height: 222px;
-    margin-top: 50px;
+    height: 186px;
+    margin-top: 14px;
 }
 .l-r-s{
     font-family: system-ui;
@@ -174,4 +174,29 @@ body {
     margin-left: 67px;
     gap: 10px;
 }
+.commentInputDiv{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    margin-top: 21px;
+    right: 6px;
+  }
 
+  .commentInputDiv input{
+    position: relative;
+    width: 322px;
+    border-radius: 25px 0px 0px 25px;
+    outline: none;
+    border: 1px #a1a8b1 solid;
+    padding-left: 13px;
+    margin-left: -4px;
+    
+  }
+
+  .commentInputDiv button {
+    border-radius: 0px 25px 25px 0px;
+    border: 1px #8191a5 solid;
+    /* padding-left: 5px; */
+    margin-left: -10px;
+  }
