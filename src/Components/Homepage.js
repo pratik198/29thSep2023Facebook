@@ -17,9 +17,10 @@ import like2 from "../Images/like 2.png";
 import comment from "../Images/comment.png";
 import send from "../Images/send.png";
 import { Button } from "@mui/material";
-import { ThumbUpAltOutlined } from "@mui/icons-material";
+import { Delete, ThumbUpAltOutlined } from "@mui/icons-material";
 import { Send } from "@mui/icons-material";
 import { UserMap, getBearerToken, setBearerToken } from "./Datastore";
+import { Edit } from "@mui/icons-material";
 
 function Homepage() {
   const [Data, setData] = useState([]);
@@ -30,6 +31,9 @@ function Homepage() {
   const bearerToken = localStorage.getItem("token");
   const [apiData, setApiData] = useState(null);
   const [commentInput, setCommentInput] = useState("");
+  const [editedComment, setEditedComment] = useState("");
+  const [editedCommentId, setEditedCommentId] = useState("");
+  const loggedInUserId = localStorage.getItem("userId");
   useEffect(() => {
     GetData();
     setLikeCounts(false);
@@ -175,6 +179,78 @@ function Homepage() {
     setCommentInput(e.target.value);
   };
 
+  /**edit comments */
+
+  const updateCommentForPost = async (postId, commentId, updatedComment) => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/comment/${commentId}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ content: updatedComment }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Comment updated successfully");
+      } else {
+        const errorData = await response.json();
+        console.error("Error while updating a comment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleEditComment = (postId, commentId, commentContent) => {
+    setEditedComment(commentContent);
+    setEditedCommentId(commentId);
+  };
+  const handleSaveEditedComment = async (postId) => {
+    await updateCommentForPost(postId, editedCommentId, editedComment);
+    setEditedComment("");
+    setEditedCommentId("");
+
+    handleFetchComments(postId);
+  };
+  const isEditingComment = (commentId) => commentId === editedCommentId;
+
+  //delete comment
+
+  const deleteCommentForPost = async (postId, commentId) => {
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/facebook/comment/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            projectID: "f104bi07c490",
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Comment deleted successfully");
+        setComments((prevComments) => ({
+          ...prevComments,
+          [postId]: prevComments[postId].filter(
+            (comment) => comment._id !== commentId
+          ),
+        }));
+      } else {
+        const errorData = await response.json();
+        console.error("Error while deleting a comment:", errorData);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="post-box">
       {Data &&
@@ -276,7 +352,7 @@ function Homepage() {
 
             <div className="commentInputDiv">
               <Avatar sx={{ width: 35, height: 35 }}></Avatar>
-              
+
               <input
                 type="text"
                 id="inputBoxComment"
@@ -292,8 +368,8 @@ function Homepage() {
             <div className="chat-container">
               {comments[post._id] && (
                 <div className="scroll-container">
-                  {comments[post._id].map((comment) => (
-                    <div key={comment._id}>
+                  {comments[post._id].map((comment, index) => (
+                    <div key={index} className="comment">
                       <div
                         className="add-commnet-section"
                         style={{ display: "flex" }}
@@ -306,24 +382,64 @@ function Homepage() {
                             marginRight: "4px",
                             cursor: "pointer",
                           }}
-                          src={UserMap.get(comment.author)?.photo}></Avatar>
-                        
+                          src={UserMap.get(comment.author)?.photo}
+                        ></Avatar>
+
                         <div className="added-comment">
                           <p>
                             {comment.author && (
                               <strong style={{ fontSize: "12px" }}>
-                                {comment.author.name}
+                                {UserMap.get(comment.author)?.name}
                               </strong>
                             )}
                           </p>
                           <p style={{ fontSize: "15px" }}>{comment.content}</p>
                         </div>
                       </div>
+
+                      <h3>{comment.authorName}</h3>
+
+                    
+
                       <div style={{ display: "flex" }} className="l-r-s">
-                        <p>Like</p>
-                        <p>Reply</p>
+                        <p
+                          onClick={() =>
+                            handleEditComment(
+                              post._id,
+                              comment._id,
+                              comment.content
+                            )
+                          }
+                        >
+                          Edit
+                        </p>
+                        <p
+                          onClick={() =>
+                            deleteCommentForPost(post._id, comment._id)
+                          }
+                        >
+                          Delete
+                        </p>
                         <p>Share</p>
                       </div>
+
+                      {isEditingComment(comment._id) ? (
+                        <div className="editCommentDiv">
+                          <input
+                            type="text"
+                            id="inputBoxCommentEdit"
+                            placeholder="Edit your comment..."
+                            value={editedComment}
+                            onChange={(e) => setEditedComment(e.target.value)}
+                          />
+                          <button
+                            className="editCommentBtn"
+                            onClick={() => handleSaveEditedComment(post._id)}
+                          >
+                            <Send />
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                   ))}
                 </div>
