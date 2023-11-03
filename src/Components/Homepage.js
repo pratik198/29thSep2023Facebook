@@ -16,16 +16,25 @@ import chat from "../Images/chat.png";
 import like2 from "../Images/like 2.png";
 import comment from "../Images/comment.png";
 import send from "../Images/send.png";
+import { Button } from "@mui/material";
+import { ThumbUpAltOutlined } from "@mui/icons-material";
 
 function Homepage() {
   const [Data, setData] = useState([]);
   const [comments, setComments] = useState({});
-
+  const [likeCounts, setLikeCounts] = useState({});
+  const [isPostLiked, setPostLiked] = useState(false);
+  const [Click, SetClick] = useState(false);
   const bearerToken = localStorage.getItem("token");
-
+  const [apiData, setApiData] = useState(null);
   useEffect(() => {
     GetData();
-  }, []);
+    setLikeCounts(false);
+  }, [likeCounts]);
+
+  
+/* fetching post*/
+
 
   const GetData = async () => {
     try {
@@ -49,6 +58,56 @@ function Homepage() {
       console.error("Error:", error);
     }
   };
+
+  /*like post*/
+
+
+
+  const handleLikePost = async (postId) => {
+    const isLiked = Click;
+    SetClick(!isLiked);
+    
+    const response = await fetch(
+      `https://academics.newtonschool.co/api/v1/facebook/like/${postId}`,
+      {
+        method: isLiked ? "DELETE" : "POST",
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
+          projectID: "f104bi07c490",
+        },
+      }
+    );
+  
+    if (response.ok) {
+      console.log(isLiked ? "Unlike is clicked" : "Like is clicked");
+      setLikeCounts((prevCounts) => ({
+        ...prevCounts,
+        [postId]: isLiked ? prevCounts[postId] - 1 : prevCounts[postId] + 1,
+      }));
+    } else {
+      const errorData = await response.json();
+      console.error("Error while liking the post:", errorData);
+    }
+  };
+  
+
+
+
+  useEffect(() => { 
+    const counts = {};
+    const commentsData = {};
+    if (apiData) {
+     apiData.forEach((post) => {
+        counts[post._id] = post.likeCount;
+        commentsData[post._id] = [];
+        handleFetchComments(post._id);
+      });
+      setLikeCounts(counts);
+      setComments(commentsData);
+    }
+  }, [apiData]);
+
+  /*fetching comments*/
 
   const handleFetchComments = async (postId) => {
     try {
@@ -125,7 +184,9 @@ function Homepage() {
             <div className="line"></div>
 
             <div className="footer">
-              <div className="like-post-like-btn">
+
+              <div className="like-post-like-btn"  onClick={() => handleLikePost(post._id)}>
+
                 <span>
                   <img
                     src={like2}
@@ -138,6 +199,13 @@ function Homepage() {
                   />
                   <span id="S-comment">Like</span>
                 </span>
+
+                  {/* <Button   
+                  onClick={() => likePost(post._id)}
+                  startIcon={<ThumbUpAltOutlined />}
+                >
+                  Like
+                </Button> */}
               </div>
 
               <div
