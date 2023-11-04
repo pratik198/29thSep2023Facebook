@@ -160,10 +160,25 @@ function Homepage() {
       if (response.ok) {
         console.log("Comment created successfully");
         const data = await response.json();
+
+        // Increment the comment count for the current post
+        const updatedData = Data.map((post) => {
+          if (post._id === postId) {
+            return {
+              ...post,
+              commentCount: post.commentCount + 1,
+            };
+          }
+          return post;
+        });
+        setData(updatedData);
+
+        // Update the comments state
         setComments((prevComments) => ({
           ...prevComments,
           [postId]: [...prevComments[postId], data.data.content],
         }));
+
         setCommentInput("");
         handleFetchComments(postId);
       } else {
@@ -365,152 +380,6 @@ function Homepage() {
               </button>
             </div>
 
-            {/* <div className="chat-container">
-              {comments[post._id] && (
-                <div className="scroll-container">
-                  {comments[post._id].map((comment, index) => (
-                    <div key={index} className="comment">
-                      <div
-                        className="add-commnet-section"
-                        style={{ display: "flex" }}
-                      >
-                        <Avatar
-                          style={{
-                            height: "35px",
-                            width: "35px",
-                            marginLeft: "12px",
-                            marginRight: "4px",
-                            cursor: "pointer",
-                          }}
-                          src={UserMap.get(comment.author)?.photo}
-                        ></Avatar>
-
-                        <div className="added-comment">
-                          <p>
-                            {comment.author && (
-                              <strong style={{ fontSize: "12px" }}>
-                                {UserMap.get(comment.author)?.name}
-                              </strong>
-                            )}
-                          </p>
-                          <p style={{ fontSize: "15px" }}>{comment.content}</p>
-                        </div>
-                      </div>
-
-                      <h3>{comment.authorName}</h3>
-
-                      {comment.author === loggedInUserId && (
-                        <div style={{ display: "flex" }} className="l-r-s">
-                          <p
-                            onClick={() =>
-                              handleEditComment(
-                                post._id,
-                                comment._id,
-                                comment.content
-                              )
-                            }
-                          >
-                            Edit
-                          </p>
-                          <p
-                            onClick={() =>
-                              deleteCommentForPost(post._id, comment._id)
-                            }
-                          >
-                            Delete
-                          </p>
-                          <p>Share</p>
-                        </div>
-                      )}
-
-                      {isEditingComment(comment._id) ? (
-                        <div className="editCommentDiv">
-                          <input
-                            type="text"
-                            id="inputBoxCommentEdit"
-                            placeholder="Edit your comment..."
-                            value={editedComment}
-                            onChange={(e) => setEditedComment(e.target.value)}
-                          />
-                          <button
-                            className="editCommentBtn"
-                            onClick={() => handleSaveEditedComment(post._id)}
-                          >
-                            <Send />
-                          </button>
-                        </div>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div> */}
-
-            {/* <div className="chat-container">
-  {comments[post._id] && (
-    <div className="scroll-container">
-      {comments[post._id].map((comment, index) => (
-        <div key={index} className="comment">
-          <div className="add-commnet-section" style={{ display: "flex" }}>
-            <Avatar
-              style={{
-                height: "35px",
-                width: "35px",
-                marginLeft: "12px",
-                marginRight: "4px",
-                cursor: "pointer",
-              }}
-              src={UserMap.get(comment.author)?.photo}
-            ></Avatar>
-
-            <div className="added-comment">
-              <p>
-                {comment.author && (
-                  <strong style={{ fontSize: "12px" }}>
-                    {UserMap.get(comment.author)?.name}
-                  </strong>
-                )}
-              </p>
-              {isEditingComment(comment._id) ? (
-                <p style={{ fontSize: "15px" }}>
-                  <p
-                    id={`commentContentEditable_${comment._id}`}
-                    contentEditable={true}
-                    onBlur={() => handleSaveEditedComment(post._id)}
-                    dangerouslySetInnerHTML={{ __html: editedComment }}
-                  />
-                </p>
-              ) : (
-                <p style={{ fontSize: "15px" }}>{comment.content}</p>
-              )}
-            </div>
-          </div>
-
-          {comment.author === loggedInUserId && (
-            <div style={{ display: "flex" }} className="l-r-s">
-              <p
-                onClick={() =>
-                  handleEditComment(post._id, comment._id, comment.content)
-                }
-              >
-                Edit
-              </p>
-              <p
-                onClick={() =>
-                  deleteCommentForPost(post._id, comment._id)
-                }
-              >
-                Delete
-              </p>
-              <p>Share</p>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  )}
-</div> */}
-
             <div className="chat-container">
               {comments[post._id] && (
                 <div className="scroll-container">
@@ -528,7 +397,7 @@ function Homepage() {
                             marginRight: "4px",
                             cursor: "pointer",
                           }}
-                          src={UserMap.get(comment.author)?.photo}
+                          src={UserMap.get(comment.author)?.img}
                         ></Avatar>
 
                         <div className="added-comment">
@@ -541,7 +410,6 @@ function Homepage() {
                           </p>
                           {isEditingComment(comment._id) ? (
                             <div className="edit-comment-after-clicked">
-                             
                               <input
                                 type="text"
                                 id="inputBoxCommentEdit"
@@ -557,9 +425,8 @@ function Homepage() {
                                 onClick={() =>
                                   handleSaveEditedComment(post._id)
                                 }
-              
                               >
-                                <Send/>
+                                <Send />
                               </Send>
                             </div>
                           ) : (
