@@ -59,25 +59,6 @@ function Signup() {
       );
       console.log("handelsignup");
 
-      //     if(response.status===400){
-      //       console.log(errorData.message);
-      //       console.log(response.errorMessage);
-      //       //email empty , password empty , invalid email
-      //           setInvalidMail(true);
-      //     }
-      //     if (response.ok) {
-      //       console.log("Successfully singed up in");
-      //     } else {
-      //       const errorData = await response.json();
-      //       setErrorMessage(errorData.message);
-      //       console.log(errorData);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error:", error);
-      //     setErrorMessage("An error occurred. Please try again.");
-      //   }
-      // }
-
       if (response.status === 400) {
         // Handle specific error cases with status code 400
         
