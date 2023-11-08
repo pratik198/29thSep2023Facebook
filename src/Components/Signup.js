@@ -8,6 +8,11 @@ function Signup() {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [invalidEmail, setInvalidMail] = useState(false);
+  const [emptyEmail, setEmptyEmail] = useState(false);
+  const [emptyPassword, setEmptyPassword] = useState(false);
+  
+
 
   const handleEmailChange = (e) => {
     console.log("cyz");
@@ -25,6 +30,9 @@ function Signup() {
   };
 
   async function handlesignup(e) {
+    setInvalidMail(false);
+    setEmptyEmail(false);
+    setEmptyPassword(false);
     console.log("handelsignup");
     console.log(name);
     console.log(email);
@@ -48,6 +56,11 @@ function Signup() {
         }
       );
       console.log("handelsignup");
+      
+      if(response.status===400){
+        //email empty , password empty , invalid email
+            setInvalidMail(true);
+      }
       if (response.ok) {
         console.log("Successfully singed up in");
       } else {
@@ -72,6 +85,7 @@ function Signup() {
       <div className="register__container">
         <h1>Create a new account</h1>
         <p>It's quick and easy.</p>
+        {invalidEmail && <p>Please provide a valid email</p>}
         <div className="hr3" />
         <form onSubmit={handlesignup}>
           <div className="row">
