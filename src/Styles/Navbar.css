@@ -50,3 +50,15 @@
   .image-nav{
     height: 37px;
   }
+
+
+  .MuiMenu-paper{
+    
+    height: 23em;
+    top: 16px;
+    left: 585px;
+   
+    width: 19em;
+
+    background-color: black;
+  }

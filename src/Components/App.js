@@ -8,6 +8,7 @@ import Pratik from "./Route/Pratik";
 import Main from "./Main/Main";
 import SearchComponent from "./searchComponent";
 import UserProfile from "./MyProfile/MyProfile";
+import MyProfile from "./MyProfile/MyProfile";
 import Commingsoon from "./CommingSoon/Commingsoon";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route element={<Pratik />}>
           <Route path="/createpage" element={<CreatePage />} />
+          <Route path="/profile" element={<MyProfile/>}/>
           <Route path="/userprofile" element={<UserProfile/>}/>
           <Route path="/main" element={<Main />} />
           <Route path="/search" element={<SearchComponent/>}/>

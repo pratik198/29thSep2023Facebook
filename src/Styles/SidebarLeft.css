@@ -9,16 +9,17 @@
   top: 82px;
   position: fixed;
 }
-.SidebarLeft :hover{
+/* .SidebarLeft :hover{
   background-color: rgb(214, 209, 209);
   border-radius: 13px;
-  /* padding-left: 4px; */
-}
+
+} */
 
 h4 {
   position: relative;
   left: 16px;
   bottom: 8px;
+  color: black;
 }
 
 .sidebar-icon {

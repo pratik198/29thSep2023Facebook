@@ -7,9 +7,10 @@ export function useAuth() {
     const storedUserId = localStorage.getItem("userId");
     const [loggedInUserId, setLoggedInUserId] = useState(storedUserId || null);
     const [apiSearch, setApiSearchData] = useState([]);
+    const [puId, setpuId] = useState("");
   
     return (
-      <AuthContext.Provider value={{loggedInUserId, setLoggedInUserId,setApiSearchData,apiSearch }}>
+      <AuthContext.Provider value={{loggedInUserId, setLoggedInUserId,setApiSearchData,apiSearch,puId, setpuId }}>
         {children}
       </AuthContext.Provider>
     );

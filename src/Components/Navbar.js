@@ -1,19 +1,4 @@
-// import ListItem from "@mui/material";
-
-
-import {
-  Avatar,
-  Divider,
-  ListItemButton,
-} from "@mui/material";
-import { ListItem } from "@mui/material";
-import Settings from "@mui/icons-material/Settings";
-import { EmojiFlagsRounded } from "@mui/icons-material";
-import { FeedRounded } from "@mui/icons-material";
-import { Logout } from "@mui/icons-material";
-
-
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -25,34 +10,19 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { Modal } from "@mui/material";
-import { UserMap } from "./Datastore";
-
-import {
-  BrowserRouter,
-  Link,
-  NavLink,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Navbar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import FlagIcon from "@mui/icons-material/Flag";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
-import { useAuth } from "./Context";
-import { toBeChecked } from "@testing-library/jest-dom/matchers";
-// import SearchIcon from '@mui/icons-material/Search';
-// const navigate = useNavigate();
-
-const menuId = "primary-search-account-menu";
+// import React, { useState, useCallback } from "react";
+import Modal from "@netojose/react-modal";
+import ReactDOM from "react-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -99,9 +69,6 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -121,8 +88,6 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const userIdForNav = localStorage.getItem("userId");
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -140,9 +105,20 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
-    </Menu>
+      <MenuItem
+         className="modal-for-fb"
+        onClick={handleMenuClose}
+        style={{ height: "23em", top: "-6px", left: "585px", width: "19em" }}
+
+      >
+
+        Arun
+      </MenuItem>
+
+
+  
+
+   </Menu>
   );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -192,9 +168,6 @@ export default function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        {/* <Link to="/"> */}
-        <button onClick={handleLogout}>Profile</button>
-        {/* </Link> */}
       </MenuItem>
     </Menu>
   );
@@ -206,9 +179,14 @@ export default function PrimarySearchAppBar() {
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
     }
   };
+
+
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -229,13 +207,6 @@ export default function PrimarySearchAppBar() {
               className="seachInput"
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
-            //  value={searchQuery}
-            //  onChange={handleInputChange}
-            //  onKeyDown={(e) => {
-            //    if (e.key === "Enter") {
-            //      handleSearch();
-            //    }
-            //  }}
             />
           </Search>
           <div className="header_center">
@@ -284,127 +255,9 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="#0866FF"
             >
-              {/* <Link to="/">
-                <AccountCircle onClick={handleLogout} />
-              </Link> */}
+           
+              <AccountCircle />
             </IconButton>
-            <section className="modalSection">
-              <Modal
-                className="modalAcountIcon"
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <section>
-                  <Box className="modalBox">
-                    <div>
-                      <Box className="boxUser">
-                        <ListItemButton>
-                          <Link to={"/profile"} className="black-link">
-                            <div className="acountData">
-                              {UserMap.get(userIdForNav) && (
-                                <Avatar sx={{ width: 30, height: 30 }} src={UserMap.get(userIdForNav)?.photo}></Avatar>
-                              )}
-                              <Typography>{UserMap.get(userIdForNav)?.name}</Typography>
-
-                            </div>
-                          </Link>
-                        </ListItemButton>
-                        <Divider />
-                        <ListItemButton className="seeAllListButton">
-                          <div className="SeeAll">
-                            <Typography>See all profile</Typography>
-                          </div>
-                        </ListItemButton>
-                      </Box>
-                    </div>
-
-                    <div className="modalList">
-                      <div className="listItemProfile">
-                        <ListItemButton>
-                          <Settings />
-                          <Typography
-                            id="modal-modal-title"
-                            variant="h6"
-                            component="h2"
-                            role="button"
-                          >
-                            Settings & privacy
-                          </Typography>
-                        </ListItemButton>
-                      </div>
-                      <div className="listItemProfile">
-                        <Link to={"/createPage"} className="black-link">
-                          <ListItemButton>
-                            <EmojiFlagsRounded />
-                            <Typography
-                              id="modal-modal-title"
-                              variant="h6"
-                              component="h2"
-                              role="button"
-                            >
-                              Page
-                            </Typography>
-                          </ListItemButton>
-                        </Link>
-                      </div>
-                      <div className="listItemProfile">
-
-                        <ListItemButton>
-                          <Typography
-                            id="modal-modal-title"
-                            variant="h6"
-                            component="h2"
-                            role="button"
-                          >
-                            Display & accessibility
-                          </Typography>
-                        </ListItemButton>
-
-
-                      </div>
-                      <div className="listItemProfile">
-                        <Link to={"/updatePassword"} className="black-link">
-                          <ListItemButton>
-                            <FeedRounded />
-                            <Typography
-                              id="modal-modal-title"
-                              variant="h6"
-                              component="h2"
-                              role="button"
-                            >
-                              Update Password
-                            </Typography>
-                          </ListItemButton>
-                        </Link>
-                      </div>
-                      <div
-                        className="listItemProfile"
-                        onClick={habdleLoginLogout}
-                      >
-                        <Link to="/" className="black-link">
-                          <ListItem>
-                            <Logout />
-                            <Typography
-                              id="modal-modal-title"
-                              variant="h6"
-                              component="h2"
-                              role="button"
-                            >
-                              {isLoggedIn ? "Logout" : "Login"}
-                            </Typography>
-                          </ListItem>
-                        </Link>
-
-
-                      </div>
-                    </div>
-                  </Box>
-                </section>
-
-              </Modal>
-            </section>
           </Box>
         </Toolbar>
       </AppBar>
@@ -413,4 +266,3 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
-
