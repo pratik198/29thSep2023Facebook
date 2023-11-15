@@ -21,12 +21,12 @@ import { Delete, ThumbUpAltOutlined } from "@mui/icons-material";
 import { Send } from "@mui/icons-material";
 import { UserMap, getBearerToken, setBearerToken } from "./Datastore";
 import { Edit } from "@mui/icons-material";
-// import { useAuth } from "./Context";
+import { useAuth } from "./Context";
 
 
 
 function Homepage() {
-  // const{setpuId} =useAuth();
+  const{setpuId} =useAuth();
   const [Data, setData] = useState([]);
   const [comments, setComments] = useState({});
   const [likeCounts, setLikeCounts] = useState({});
@@ -320,7 +320,7 @@ function Homepage() {
             sx={{ maxWidth: 450, maxHeight: 800, height: "50em" }}
             key={post._id}
           >
-            <Link to="/userprofile">
+            <Link onClick={()=>{setpuId(post?.author?._id)}} to="/userprofile">
             <CardHeader 
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

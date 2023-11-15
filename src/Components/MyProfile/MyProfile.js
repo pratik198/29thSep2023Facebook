@@ -11,6 +11,8 @@ function MyProfile(){
     const userId = localStorage.getItem("userId");
 
     const fetchData = async () => {
+      console.log("inside myProfile");
+      console.log(userId);
         const response = await fetch(
           `https://academics.newtonschool.co/api/v1/facebook/user/${userId}`,
           {
