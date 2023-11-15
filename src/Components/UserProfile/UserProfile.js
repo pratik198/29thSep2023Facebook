@@ -31,6 +31,8 @@ function UserProfile(){
         fetchData();
       }, []);
     return(
+
+        ////user  profile
         <div >
             <Navbar />
             <section className="myProfileContent">
