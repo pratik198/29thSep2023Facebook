@@ -47,7 +47,7 @@ function Homepage() {
   const GetData = async () => {
     try {
       const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/facebook/post?limit=100",
+        "https://academics.newtonschool.co/api/v1/facebook/post?limit=40",
         {
           headers: {
             projectID: "f104bi07c490",
@@ -317,11 +317,14 @@ function Homepage() {
             sx={{ maxWidth: 450, maxHeight: 800, height: "50em" }}
             key={post._id}
           >
-            {/* <Link onClick={()=>{setpuId(post?.author?._id)}} to="/userprofile">
-            <CardHeader 
+            {/* <Link to={"/userprofile"}>
+            <CardHeader onClick={()=>{
+              console.log("Setting puId:", post?.author?._id);
+                  setpuId(post?.author?._id);
+            }}
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  <img src={post.author.profileImage} alt="..." />
+                  <img src={post.author.profileImage} alt="{post.author.name}" />
                 </Avatar>
               }
               action={
@@ -332,6 +335,7 @@ function Homepage() {
               title={post.author.name}
               subheader="September 14, 2016"
             /></Link> */}
+
             <Link className="userProfile-img-name" to="/userprofile">
               <div
                 className="accountPost-img"
@@ -341,7 +345,11 @@ function Homepage() {
                 }}
               >
                 <Avatar alt={post.author.name} src={post.author.profileImage} />
-                <Typography>{post.author.name}</Typography>
+                <div className="author-name-name">
+                  <h4 className="naem-author">{post.author.name}</h4>
+                </div>
+                {/* <div className="author-name-name-name">
+                <p className="naem-author-date">September 14, 2016</p></div> */}
               </div>
             </Link>
 
