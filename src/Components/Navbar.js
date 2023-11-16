@@ -1,29 +1,30 @@
-import { useState,useCallback } from "react";
+import { useState, useCallback } from "react";
+import Modal from "@netojose/react-modal";
+import ReactDOM from "react-dom";
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../Styles/Navbar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import FlagIcon from "@mui/icons-material/Flag";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
-// import React, { useState, useCallback } from "react";
-import Modal from "@netojose/react-modal";
-import ReactDOM from "react-dom";
-import { Avatar, colors } from "@mui/material";
+
+import { Avatar } from "@mui/material";
+import ListItemButton from "@mui/material";
+import Typography from "@mui/material";
+import Divider from "@mui/material";
+import { Settings } from "@mui/icons-material";
+import { EmojiFlagsRounded, FeedbackRounded } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -64,114 +64,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const [open, setOpen] = React.useState(false);
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-  const navigate = useNavigate();
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={anchorEl}
-  //     anchorOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     id={menuId}
-  //     keepMounted
-  //     transformOrigin={{
-  //       vertical: "top",
-  //       horizontal: "right",
-  //     }}
-  //     open={isMenuOpen}
-  //     onClose={handleMenuClose}
-  //   >
-  //     <MenuItem
-  //        className="modal-for-fb"
-  //       onClick={handleMenuClose}
-  //       style={{ height: "23em", top: "-6px", left: "585px", width: "19em" }}
-
-  //     >
-
-  //       Arun
-  //     </MenuItem>
-
-
-  
-
-  //  </Menu>
-  // );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-      </MenuItem>
-    </Menu>
-  );
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   // function handleLogout() {
   //   console.log("clicked");
@@ -189,12 +101,7 @@ export default function PrimarySearchAppBar() {
       "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FydG9vbiUyMGFuaW1hbHxlbnwwfHwwfHx8MA%3D%3D",
     displayName: "Pratik",
   };
-  
-
-
-  const [isOpen, setIsOpen] = useState(false);
-  const openModal = useCallback(() => setIsOpen(true), []);
-  const closeModal = useCallback(() => setIsOpen(false), []);
+  const username = localStorage.getItem("userName");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -241,38 +148,44 @@ export default function PrimarySearchAppBar() {
               aria-label="show 4 new mails"
               color="#0866FF"
             >
-            <Link to={"/commingsoon"}>
-              <Badge color="error">
-                <MailIcon />
-              </Badge></Link>
+              <Link to={"/commingsoon"}>
+                <Badge color="error">
+                  <MailIcon />
+                </Badge>
+              </Link>
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="#0866FF"
             >
-            <Link to={"/commingsoon"}>
-              <Badge color="error">
-                <NotificationsIcon />
-              </Badge></Link>
+              <Link to={"/commingsoon"}>
+                <Badge color="error">
+                  <NotificationsIcon />
+                </Badge>
+              </Link>
             </IconButton>
             <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="#0866FF"
             >
-           
-              <Avatar src={myAvtarr.photoURL}/>
+              <Avatar src={myAvtarr.photoURL} onClick={openModal} />
             </IconButton>
+
+            <section className="modalSection">
+              <Modal isOpen={isOpen} onRequestClose={closeModal} className="custom-modal"
+        overlayClassName="custom-overlay">
+                <p>This is the modal content</p>
+                <input type="button" value="Close modal" onClick={closeModal} />
+              </Modal>
+            </section>
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {/* {renderMenu} */}
     </Box>
   );
 }
