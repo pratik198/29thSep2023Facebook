@@ -11,7 +11,7 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const User = {
+const myAvtar = {
   photoURL:
     "https://scontent.fbbi4-1.fna.fbcdn.net/v/t39.30808-6/384470156_621637833475535_5680275089051804810_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hAceM4VMwKMAX_mV2pN&_nc_ht=scontent.fbbi4-1.fna&oh=00_AfA0t1N7_IgPHFr-wkBDtnRylfpFZsrEKwOSPXZ-QcOpfA&oe=655A21FB",
   displayName: "Pratik",
@@ -26,15 +26,12 @@ function SidebarLeft() {
       <Link to={"/profile"} className="sidebar-icon">
       <Link to={"/profile"}>
         <div className="abc">
-          <Avatar src={User.photoURL} className="a" />
+          <Avatar src={myAvtar.photoURL} className="a" />
         </div></Link>
         <Link to={"/profile"}>
         <h4>{username}</h4></Link>
       </Link>
-      <div className="sidebarRow">
-        <LocalHospitalIcon />
-        <p className="right-sec">COVID-19 Information Center</p>
-      </div>
+     <Link to={"/commingSoon"}>
       <div className="sidebarRow">
         <EmojiFlagsIcon />
         <p className="right-sec">Pages</p>
@@ -58,7 +55,7 @@ function SidebarLeft() {
       <div className="sidebarRow">
         <ExpandMoreOutlined />
         <p className="right-sec">More</p>
-      </div>
+      </div></Link>
     </div>
   );
 }

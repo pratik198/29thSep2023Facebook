@@ -23,10 +23,8 @@ import { UserMap, getBearerToken, setBearerToken } from "./Datastore";
 import { Edit } from "@mui/icons-material";
 import { useAuth } from "./Context";
 
-
-
 function Homepage() {
-  const{setpuId} =useAuth();
+  const { setpuId } = useAuth();
   const [Data, setData] = useState([]);
   const [comments, setComments] = useState({});
   const [likeCounts, setLikeCounts] = useState({});
@@ -49,7 +47,7 @@ function Homepage() {
   const GetData = async () => {
     try {
       const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/facebook/post",
+        "https://academics.newtonschool.co/api/v1/facebook/post?limit=100",
         {
           headers: {
             projectID: "f104bi07c490",
@@ -239,7 +237,6 @@ function Homepage() {
   };
   const isEditingComment = (commentId) => commentId === editedCommentId;
 
-
   // const updateCommentForPost = async (postId, commentId, updatedComment) => {
 
   //   try {
@@ -320,7 +317,7 @@ function Homepage() {
             sx={{ maxWidth: 450, maxHeight: 800, height: "50em" }}
             key={post._id}
           >
-            <Link onClick={()=>{setpuId(post?.author?._id)}} to="/userprofile">
+            {/* <Link onClick={()=>{setpuId(post?.author?._id)}} to="/userprofile">
             <CardHeader 
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -334,7 +331,20 @@ function Homepage() {
               }
               title={post.author.name}
               subheader="September 14, 2016"
-            /></Link>
+            /></Link> */}
+            <Link className="userProfile-img-name" to="/userprofile">
+              <div
+                className="accountPost-img"
+                onClick={() => {
+                  console.log("Setting puId:", post?.author?._id);
+                  setpuId(post?.author?._id);
+                }}
+              >
+                <Avatar alt={post.author.name} src={post.author.profileImage} />
+                <Typography>{post.author.name}</Typography>
+              </div>
+            </Link>
+
             <CardContent>
               <Typography variant="body2" color="text.secondary">
                 {post.content}
@@ -483,8 +493,16 @@ function Homepage() {
                           )}
                         </div>
                       </div>
-                      {console.log("Comment author:", comment.author, "Logged-in user:", loggedInUserId)}
-                      {console.log("Is user's comment:", comment.author === loggedInUserId)}
+                      {console.log(
+                        "Comment author:",
+                        comment.author,
+                        "Logged-in user:",
+                        loggedInUserId
+                      )}
+                      {console.log(
+                        "Is user's comment:",
+                        comment.author === loggedInUserId
+                      )}
                       {comment.author === loggedInUserId && (
                         <div style={{ display: "flex" }} className="l-r-s">
                           <p

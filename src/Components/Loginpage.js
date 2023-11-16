@@ -53,19 +53,23 @@ function Loginpage() {
         setAPiDown(true);
       }else if (response.ok) {
         console.log("Successfully logged in");
-        // setIsLoggedIn(true);
         const json = await response.json();
         setBearerToken(json["token"]);
         console.log(json);
         localStorage.setItem("token", json.token);
+        localStorage.setItem("userId", json.data._id);
         localStorage.setItem("userName",json.data.name);
         console.log(json.name);
         console.log(json.data._id);
         localStorage.setItem("userId",json.data._id);
-        UserMap.set(json.data._id, {
-          name: json.data.name,
-          photo: "https://scontent.fbbi4-1.fna.fbcdn.net/v/t39.30808-6/384470156_621637833475535_5680275089051804810_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hAceM4VMwKMAX_mV2pN&_nc_ht=scontent.fbbi4-1.fna&oh=00_AfA0t1N7_IgPHFr-wkBDtnRylfpFZsrEKwOSPXZ-QcOpfA&oe=655A21FB",
-        });
+        // UserMap.set(json.data._id, {
+        //   name: json.data.name,
+        //   photo: "https://scontent.fbbi4-1.fna.fbcdn.net/v/t39.30808-6/384470156_621637833475535_5680275089051804810_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hAceM4VMwKMAX_mV2pN&_nc_ht=scontent.fbbi4-1.fna&oh=00_AfA0t1N7_IgPHFr-wkBDtnRylfpFZsrEKwOSPXZ-QcOpfA&oe=655A21FB",
+        // });
+        if(UserMap.has(json.data._id)===false){
+          console.log("user Value is not found in map");
+        UserMap.set(json.data._id,{name:json.data.name,photo:"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/995.jpg"})
+        }
        
         console.log(UserMap.get("652e8f8c64d7830e72354ff6"));
         navigate("/main");

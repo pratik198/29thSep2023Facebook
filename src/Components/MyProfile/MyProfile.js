@@ -12,7 +12,7 @@ function MyProfile(){
 
     const fetchData = async () => {
       console.log("inside myProfile");
-      console.log(userId);
+      console.log("my id",userId);
         const response = await fetch(
           `https://academics.newtonschool.co/api/v1/facebook/user/${userId}`,
           {
@@ -29,13 +29,13 @@ function MyProfile(){
       };
 
       useEffect(() => {
-        fetchData("userId");
+        fetchData();
       }, []);
 
-      const User = {
+      const myProfile = {
         photoURL:
           "https://scontent.fbbi4-1.fna.fbcdn.net/v/t39.30808-6/384470156_621637833475535_5680275089051804810_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=hAceM4VMwKMAX_mV2pN&_nc_ht=scontent.fbbi4-1.fna&oh=00_AfA0t1N7_IgPHFr-wkBDtnRylfpFZsrEKwOSPXZ-QcOpfA&oe=655A21FB",
-        displayName: "Pratik",
+        
       };
       
     return(
@@ -44,13 +44,13 @@ function MyProfile(){
             <section className="myProfileContent">
             <section className="profileHeader">
             <section className="profileImage">
-                <img id="profileimg" src={User.photoURL}  alt="user" />
+                <img id="profileimg" src={myProfile.photoURL}  alt="user" />
             </section>
             <section className="profileAvtar">
                 <div className="profileAvtarDiv">
             <section className="avtarProfile">
             
-                            <Avatar sx={{ width: 135, height: 135 }} src={User.photoURL} ></Avatar>
+                            <Avatar sx={{ width: 135, height: 135 }} src={myProfile.photoURL} ></Avatar>
                           
            </section>
             

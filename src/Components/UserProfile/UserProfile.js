@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
-import Navbar from "../Nav/Navbar";
+import Navbar from "../Navbar";
 import Avatar from "@mui/material/Avatar";
-import { useAuth } from "../Context/Context";
+import { useAuth } from "../Context";
 
 
 function UserProfile(){
@@ -11,7 +11,7 @@ function UserProfile(){
     const {puId} = useAuth();
 
     const fetchData = async () => {
-        console.log(puId)
+        console.log("user id",puId)
         const response = await fetch(
           `https://academics.newtonschool.co/api/v1/facebook/user/${puId}`,
           {
