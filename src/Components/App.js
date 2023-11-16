@@ -9,7 +9,7 @@ import Main from "./Main/Main";
 import SearchComponent from "./searchComponent";
 import UserProfile from "./../Components/UserProfile/UserProfile";
 import MyProfile from "./MyProfile/MyProfile";
-import Commingsoon from "./CommingSoon/Commingsoon";
+import Commingsoon from './../Components/CommingSoon/Commingsoon'
 
 
 function App() {

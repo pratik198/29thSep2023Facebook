@@ -3,4 +3,7 @@
     justify-content: center;
     height: 100vh;
     width: 100vw;
+    position: relative;
+    top: 11em;
+    right: 38em;
 }

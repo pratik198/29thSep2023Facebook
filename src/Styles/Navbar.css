@@ -62,3 +62,11 @@
 
     background-color: black;
   }
+
+  .accountPost-img {
+    display: flex;
+    padding-left: 15px;
+    /* padding-top: 1px; */
+    position: relative;
+    top: 9px;
+  }

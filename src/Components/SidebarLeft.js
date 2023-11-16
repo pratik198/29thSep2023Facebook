@@ -31,31 +31,32 @@ function SidebarLeft() {
         <Link to={"/profile"}>
         <h4>{username}</h4></Link>
       </Link>
-     <Link to={"/commingSoon"}>
-      <div className="sidebarRow">
+     {/* <Link to={"/commingsoon"}> */}
+      <Link to={"/commingsoon"} className="sidebarRow">
         <EmojiFlagsIcon />
         <p className="right-sec">Pages</p>
-      </div>
-      <div className="sidebarRow">
+      </Link>
+      <Link to={"/commingsoon"} className="sidebarRow">
         <PeopleIcon />
         <p className="right-sec">Friends</p>
-      </div>
-      <div className="sidebarRow">
+      </Link>
+      <Link to={"/commingsoon"} className="sidebarRow">
         <ChatIcon />
         <p className="right-sec">Messenger</p>
-      </div>
-      <div className="sidebarRow">
+      </Link>
+      <Link to={"/commingsoon"} className="sidebarRow">
         <StorefrontIcon />
         <p className="right-sec">Marketplace</p>
-      </div>
-      <div className="sidebarRow">
+      </Link>
+      <Link to={"/commingsoon"} className="sidebarRow">
         <VideoLibraryIcon />
         <p className="right-sec">Videos</p>
-      </div>
-      <div className="sidebarRow">
+      </Link>
+      <Link to={"/commingsoon"} className="sidebarRow">
         <ExpandMoreOutlined />
         <p className="right-sec">More</p>
-      </div></Link>
+      </Link>
+      {/* </Link> */}
     </div>
   );
 }
