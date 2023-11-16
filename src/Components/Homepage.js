@@ -47,7 +47,7 @@ function Homepage() {
   const GetData = async () => {
     try {
       const response = await fetch(
-        "https://academics.newtonschool.co/api/v1/facebook/post?limit=40",
+        "https://academics.newtonschool.co/api/v1/facebook/post?",
         {
           headers: {
             projectID: "f104bi07c490",

@@ -23,6 +23,7 @@ import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
 // import React, { useState, useCallback } from "react";
 import Modal from "@netojose/react-modal";
 import ReactDOM from "react-dom";
+import { Avatar, colors } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -89,37 +90,37 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem
-         className="modal-for-fb"
-        onClick={handleMenuClose}
-        style={{ height: "23em", top: "-6px", left: "585px", width: "19em" }}
+  // const renderMenu = (
+  //   <Menu
+  //     anchorEl={anchorEl}
+  //     anchorOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     id={menuId}
+  //     keepMounted
+  //     transformOrigin={{
+  //       vertical: "top",
+  //       horizontal: "right",
+  //     }}
+  //     open={isMenuOpen}
+  //     onClose={handleMenuClose}
+  //   >
+  //     <MenuItem
+  //        className="modal-for-fb"
+  //       onClick={handleMenuClose}
+  //       style={{ height: "23em", top: "-6px", left: "585px", width: "19em" }}
 
-      >
+  //     >
 
-        Arun
-      </MenuItem>
+  //       Arun
+  //     </MenuItem>
 
 
   
 
-   </Menu>
-  );
+  //  </Menu>
+  // );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -183,6 +184,13 @@ export default function PrimarySearchAppBar() {
     }
   };
 
+  const myAvtarr = {
+    photoURL:
+      "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FydG9vbiUyMGFuaW1hbHxlbnwwfHwwfHx8MA%3D%3D",
+    displayName: "Pratik",
+  };
+  
+
 
   const [isOpen, setIsOpen] = useState(false);
   const openModal = useCallback(() => setIsOpen(true), []);
@@ -210,21 +218,21 @@ export default function PrimarySearchAppBar() {
             />
           </Search>
           <div className="header_center">
-            <div className="header_option header_option--active">
+            <Link to={"/main"} className="header_option header_option--active">
               <HomeIcon fontSize="large" />
-            </div>
-            <div className="header_option">
+            </Link>
+            <Link to={"/commingsoon"} className="header_option">
               <FlagIcon fontSize="large" />
-            </div>
-            <div className="header_option">
+            </Link>
+            <Link to={"/commingsoon"} className="header_option">
               <SubscriptionsIcon fontSize="large" />
-            </div>
-            <div className="header_option">
+            </Link>
+            <Link to={"/commingsoon"} className="header_option">
               <StorefrontOutlined fontSize="large" />
-            </div>
-            <div className="header_option">
+            </Link>
+            <Link to={"/commingsoon"} className="header_option">
               <SupervisedUserCircle fontSize="large" />
-            </div>
+            </Link>
           </div>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -233,18 +241,20 @@ export default function PrimarySearchAppBar() {
               aria-label="show 4 new mails"
               color="#0866FF"
             >
+            <Link to={"/commingsoon"}>
               <Badge color="error">
                 <MailIcon />
-              </Badge>
+              </Badge></Link>
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="#0866FF"
             >
+            <Link to={"/commingsoon"}>
               <Badge color="error">
                 <NotificationsIcon />
-              </Badge>
+              </Badge></Link>
             </IconButton>
             <IconButton
               size="large"
@@ -256,13 +266,13 @@ export default function PrimarySearchAppBar() {
               color="#0866FF"
             >
            
-              <AccountCircle />
+              <Avatar src={myAvtarr.photoURL}/>
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+      {/* {renderMenu} */}
     </Box>
   );
 }

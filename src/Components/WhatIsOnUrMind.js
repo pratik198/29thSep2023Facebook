@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import MoodIcon from "@mui/icons-material/Mood";
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function WhatIsOnUrMind() {
   return (
@@ -12,29 +13,27 @@ function WhatIsOnUrMind() {
       {/* reels box */}
       <div className="parent-reel-section">
 
-        <div className="reel-box">
-          
-          {/* <Avatar className="story_avatar" alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+        <Link to={"/commingsoon"} className="reel-box">
          
           <img className="story-img" src="https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2022/11/Naruto.jpg?ssl=1&quality=80&w=800" alt="#"/>
           
-        </div>
+        </Link>
 
-        <div className="reel-box">
+        <Link to={"/commingsoon"} className="reel-box">
           <img className="story-img" src="https://cdn.mos.cms.futurecdn.net/68nJwaxHSFmE6whdL4r5oH-970-80.jpg.webp" alt="#"/>
-        </div>
+        </Link>
 
-        <div className="reel-box">
+        <Link to={"/commingsoon"} className="reel-box">
           <img className="story-img" src="https://thumbor.forbes.com/thumbor/trim/0x53:980x604/fit-in/711x399/smart/https://specials-images.forbesimg.com/imageserve/60834c47698b7d2cd708c3f0/0x0.jpg" alt="#"/>
-        </div>
+        </Link>
 
-        <div className="reel-box">
+        <Link to={"/commingsoon"} className="reel-box">
           <img className="story-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnG0NLa59PE1ZVQeqq4ZJkkkhuibDTG2hHYg&usqp=CAU" alt="#" />
-        </div>
+        </Link>
 
-        <div className="reel-box">
+        <Link to={"/commingsoon"} className="reel-box">
         <img className="story-img" src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191101175718/How-do-I-become-a-good-Java-programmer.png" alt="#" />
-        </div>
+        </Link>
 
       </div>
       {/* mind box */}
