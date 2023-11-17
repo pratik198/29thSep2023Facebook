@@ -8,8 +8,15 @@ import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function WhatIsOnUrMind() {
+
+
+const myAvtar = {
+  photoURL:
+    "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FydG9vbiUyMGFuaW1hbHxlbnwwfHwwfHx8MA%3D%3D",
+  displayName: "Pratik",
+};
   return (
-    <div className="wht-is-on-your-mind">
+    <Link to={"/commingsoon"} className="wht-is-on-your-mind">
       {/* reels box */}
       <div className="parent-reel-section">
 
@@ -49,7 +56,7 @@ function WhatIsOnUrMind() {
           </div>
           <div className="bar"></div>
           <div className="parent-avtar">
-            <Avatar alt="Remy Sharp" src="https://scontent.fbbi5-3.fna.fbcdn.net/v/t39.30808-6/329750281_876225640319997_3973598474329394205_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=s1L-8CVRSBEAX9z1tWR&_nc_oc=AQkfuV19465mQ9H3WM_m9uAGqfE7dBg6E3_E8xpE-PE5RxkhNM2txngTPaIQ1g4uhfG_o-u6d5I8KNxPI-prVAOd&_nc_ht=scontent.fbbi5-3.fna&oh=00_AfAgj04fAIEy_wF97obQlRQ1ZEopBXaqw0yXvpSEPAglnw&oe=65393FC1" />
+            <Avatar alt="Remy Sharp" src={myAvtar.photoURL} />
           </div>
           <div className="parent-footer">
             <div
@@ -76,7 +83,7 @@ function WhatIsOnUrMind() {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

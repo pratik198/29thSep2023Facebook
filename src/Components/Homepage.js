@@ -237,47 +237,7 @@ function Homepage() {
   };
   const isEditingComment = (commentId) => commentId === editedCommentId;
 
-  // const updateCommentForPost = async (postId, commentId, updatedComment) => {
-
-  //   try {
-  //     const response = await fetch(
-  //       `https://academics.newtonschool.co/api/v1/facebook/comment/${commentId}`,
-  //       {
-  //         method: "PATCH",
-  //         headers: {
-  //           Authorization: `Bearer ${bearerToken}`,
-  //           projectID: "f104bi07c490",
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ content: updatedComment }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       console.log("Comment updated successfully");
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error("Error while updating a comment:", errorData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-  // const handleEditComment = (postId, commentId, commentContent) => {
-  //   console.log("Edit button clicked");
-  //   setEditedComment(commentContent);
-  //   setEditedCommentId(commentId);
-  // };
-  // const handleSaveEditedComment = async (postId) => {
-  //   await updateCommentForPost(postId, editedCommentId, editedComment);
-  //   setEditedComment("");
-  //   setEditedCommentId("");
-
-  //   handleFetchComments(postId);
-  // };
-  // const isEditingComment = (commentId) => commentId === editedCommentId;
-
-  //delete comment
+  
 
   const deleteCommentForPost = async (postId, commentId) => {
     try {
