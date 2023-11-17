@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import Modal from "@netojose/react-modal";
+import FeedbackIcon from '@mui/icons-material/Feedback';
+import { Modal } from "@mui/material";
 import ReactDOM from "react-dom";
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
@@ -12,19 +13,25 @@ import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../Styles/Navbar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import FlagIcon from "@mui/icons-material/Flag";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import { StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
-
+import { Logout, StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import HelpIcon from '@mui/icons-material/Help';
+import SettingsIcon from '@mui/icons-material/Settings';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Avatar } from "@mui/material";
 import ListItemButton from "@mui/material";
-import Typography from "@mui/material";
+
+import { Typography } from "@mui/material";
+
 import Divider from "@mui/material";
 import { Settings } from "@mui/icons-material";
 import { EmojiFlagsRounded, FeedbackRounded } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -35,10 +42,11 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-function handleLogout() {
-  console.log("clicked");
-  localStorage.removeItem("token");
-}
+// function handleLogout() {
+//   console.log("clicked");
+//   localStorage.removeItem("token");
+//   navigate("/");
+// }
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -64,19 +72,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
-
-  const [isOpen, setIsOpen] = useState(false);
-  const openModal = useCallback(() => setIsOpen(true), []);
-  const closeModal = useCallback(() => setIsOpen(false), []);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const username = localStorage.getItem("userName");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -85,14 +84,12 @@ export default function PrimarySearchAppBar() {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // function handleLogout() {
-  //   console.log("clicked");
-  //   localStorage.removeItem("token");
-  // }
+ 
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
       localStorage.removeItem("token");
+      
     }
   };
 
@@ -101,7 +98,7 @@ export default function PrimarySearchAppBar() {
       "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FydG9vbiUyMGFuaW1hbHxlbnwwfHwwfHx8MA%3D%3D",
     displayName: "Pratik",
   };
-  const username = localStorage.getItem("userName");
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -173,14 +170,62 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="#0866FF"
             >
-              <Avatar src={myAvtarr.photoURL} onClick={openModal} />
+              <Avatar src={myAvtarr.photoURL} onClick={handleOpen} />
             </IconButton>
 
             <section className="modalSection">
-              <Modal isOpen={isOpen} onRequestClose={closeModal} className="custom-modal"
-        overlayClassName="custom-overlay">
-                <p>This is the modal content</p>
-                <input type="button" value="Close modal" onClick={closeModal} />
+              <Modal
+                className="modalAcountIcon"
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box className="modalBox">
+                  <Link to={"/profile"}>
+                    <Box className="boxUser">
+                    <Link to={"/profile"} className="user-name-modal-a">
+                    <Avatar src={myAvtarr.photoURL} /></Link>
+                    <Link to={"/profile"} >
+                        <h3 className="author-name-modal">{username}</h3></Link>
+                        <p className="see-all-profile">See all profile</p>
+                        <div className="line-modal-box"></div>
+                    </Box>
+                  </Link>
+                  <div className="options-modal">
+                      <div className="icons-modal">
+                          <SettingsIcon/>
+                          <p>Settings & privacy</p>
+                      </div>
+                      <div className="icons-modal">
+                          <HelpIcon/>
+                          <p>Help and support</p>
+                      </div>
+                      <div className="icons-modal">
+                          <DarkModeIcon/>
+                          <p>Display & accessibility</p>
+                      </div>
+                      <div className="icons-modal">
+                          <FeedbackIcon/>
+                          <p>Give feedback</p>
+                      </div>
+                      <Link to="/"className="black-link">
+                      <div className="icons-modal" onClick={habdleLoginLogout}>
+                          <Logout/>
+                          <p
+                            id="modal-modal-title"
+                            variant="h6"
+                            component="h2"
+                            role="button"
+                          >
+                            {isLoggedIn ? "Logout" : "Login"}
+                          </p>
+                          {/* <p>Log out</p> */}
+                      </div>
+                      </Link>
+
+                  </div>
+                </Box>
               </Modal>
             </section>
           </Box>
