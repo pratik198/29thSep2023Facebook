@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import FeedbackIcon from '@mui/icons-material/Feedback';
+import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Modal } from "@mui/material";
 import ReactDOM from "react-dom";
 import * as React from "react";
@@ -18,13 +18,18 @@ import "../Styles/Navbar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import FlagIcon from "@mui/icons-material/Flag";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import { Logout, StorefrontOutlined, SupervisedUserCircle } from "@mui/icons-material";
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import HelpIcon from '@mui/icons-material/Help';
-import SettingsIcon from '@mui/icons-material/Settings';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import {
+  Logout,
+  StorefrontOutlined,
+  SupervisedUserCircle,
+} from "@mui/icons-material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import HelpIcon from "@mui/icons-material/Help";
+import SettingsIcon from "@mui/icons-material/Settings";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { Avatar } from "@mui/material";
 import ListItemButton from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import { Typography } from "@mui/material";
 
@@ -84,12 +89,11 @@ export default function PrimarySearchAppBar() {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
- 
+
   const habdleLoginLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
       localStorage.removeItem("token");
-      
     }
   };
 
@@ -98,7 +102,6 @@ export default function PrimarySearchAppBar() {
       "https://images.unsplash.com/photo-1505628346881-b72b27e84530?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2FydG9vbiUyMGFuaW1hbHxlbnwwfHwwfHx8MA%3D%3D",
     displayName: "Pratik",
   };
-
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -184,46 +187,50 @@ export default function PrimarySearchAppBar() {
                 <Box className="modalBox">
                   <Link to={"/profile"}>
                     <Box className="boxUser">
-                    <Link to={"/profile"} className="user-name-modal-a">
-                    <Avatar src={myAvtarr.photoURL} /></Link>
-                    <Link to={"/profile"} >
-                        <h3 className="author-name-modal">{username}</h3></Link>
-                        <p className="see-all-profile">See all profile</p>
-                        <div className="line-modal-box"></div>
+                      <Link to={"/profile"} className="user-name-modal-a">
+                        <Avatar src={myAvtarr.photoURL} />
+                      </Link>
+                      <Link to={"/profile"}>
+                        <h3 className="author-name-modal">{username}</h3>
+                      </Link>
+                      <p className="see-all-profile">See all profile</p>
+                      <div className="line-modal-box"></div>
                     </Box>
                   </Link>
                   <div className="options-modal">
-                      <div className="icons-modal">
-                          <SettingsIcon/>
-                          <p>Settings & privacy</p>
-                      </div>
-                      <div className="icons-modal">
-                          <HelpIcon/>
-                          <p>Help and support</p>
-                      </div>
-                      <div className="icons-modal">
-                          <DarkModeIcon/>
-                          <p>Display & accessibility</p>
-                      </div>
-                      <div className="icons-modal">
-                          <FeedbackIcon/>
-                          <p>Give feedback</p>
-                      </div>
-                      <Link to="/"className="black-link">
+                    <div className="icons-modal">
+                      <SettingsIcon />
+                      <p>Settings & privacy</p>
+                    
+                    </div>
+                    <div className="icons-modal">
+                      <HelpIcon />
+                      <p>Help and support</p>
+                     
+                    </div>
+                    <div className="icons-modal">
+                      <DarkModeIcon />
+                      <p>Display & accessibility</p>
+                      
+                    </div>
+                    <div className="icons-modal">
+                      <FeedbackIcon />
+                      <p>Give feedback</p>
+                    </div>
+                    <Link to="/" className="black-link">
                       <div className="icons-modal" onClick={habdleLoginLogout}>
-                          <Logout/>
-                          <p
-                            id="modal-modal-title"
-                            variant="h6"
-                            component="h2"
-                            role="button"
-                          >
-                            {isLoggedIn ? "Logout" : "Login"}
-                          </p>
-                          {/* <p>Log out</p> */}
+                        <Logout />
+                        <p
+                          id="modal-modal-title"
+                          variant="h6"
+                          component="h2"
+                          role="button"
+                        >
+                          {isLoggedIn ? "Logout" : "Login"}
+                        </p>
+                        {/* <p>Log out</p> */}
                       </div>
-                      </Link>
-
+                    </Link>
                   </div>
                 </Box>
               </Modal>

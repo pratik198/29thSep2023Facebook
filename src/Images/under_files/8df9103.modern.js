@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[521],{1074:function(e,c,n){"use strict";n.r(c),c.default=n.p+"954b1c6c88cea9e7f391b71d0a0e53bd.lottie"}}]);
-//# sourceMappingURL=8df9103.modern.js.map
